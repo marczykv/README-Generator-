@@ -1,40 +1,80 @@
 const inquirer = require('inquirer')
 const fs = require('fs');
-// // TODO: Include packages needed for this application
 
-// // TODO: Create an array of questions for user input
-// const questions = [];
+//  array of questions for user input
+const questions = [
+    {
+        type: "input",
+        name: "title",
+        message: "What is the title of your project?"
+    },
+    {
+        type: "input",
+        name: "description",
+        message: "What is the description for your project?"
+    },
+    {
+        type: "input",
+        name: "installation",
+        message: "What are the installation instructions?"
+    },
+    {
+        type: "input",
+        name: "usage",
+        message: "What is the usage?"
+    },
+    {
+        type: "list",
+        choices: ["MIT", "Apache", "ISC", "GPL", "LGPL", "MPL"],
+        name: "license",
+        message: "What is the license?"
+    },
+    {
+        type: "input",
+        name: "contributors",
+        message: "Who are the contributors?"
+    },
+    {
+        type: "input",
+        name: "test",
+        message: "What are the test instructions?"
+    }, 
+    {
+        type: "input",
+        name: "email",
+        message: "What is your email?"
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "What is your GitHub username?"
+    }
+];
 
-// // TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
 
-// // TODO: Create a function to initialize app
-// function init() {}
-
-// // Function call to initialize app
-// init();
 inquirer
-    .prompt([
-        {
-            type: "input",
-            name: "firstName",
-            message: "What is your first name?"
-        },
-        {
-            type: "input",
-            name: "lastName",
-            message: "What is your last name?"
-        },
-        {
-            type: "input",
-            name: "age",
-            message: "What is your age?"
-        }
-    ])
+    .prompt(questions)
     .then((answers) => {
+        var readMeText = 
+`# ${answers.title}
+## Project Description        
+${answers.description}
+
+## Table of Contents
+- [Description](#project-description)
+- [Installation](#installation-instructions)
 
 
-        fs.writeFile('mynewfile3.txt', JSON.stringify(answers), function (err) {
+## Installation Instructions
+${answers.installation}
+
+## Additional Questions
+GitHub Account [${answers.github}](https://github.com/${answers.github})
+Email [${answers.email}](mailto:${answers.email})
+        
+        `;
+        fs.writeFile('generatedreadme.md', readMeText
+         , function (err) {
             if (err) throw err;
             console.log('Saved!');
         });
