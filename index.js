@@ -51,10 +51,7 @@ const questions = [
     }
 ];
 
-
-
-// ... (previous code)
-
+// implements badge functionality to appear on readme 
 inquirer
     .prompt(questions)
     .then((answers) => {
@@ -82,12 +79,12 @@ inquirer
                 licenseBadgeURL = "";
                 break;
         }
+        // Readme structure in accordance to acceptance criteria 
         const readMeText = `
 # ${answers.title}
 ![License](${licenseBadgeURL})
 ## Project Description        
 ${answers.description}
-
 ## Table of Contents
 - [Description](#project-description)
 - [Installation](#installation-instructions)
@@ -114,7 +111,7 @@ ${answers.test}
 
 ## Questions
 GitHub Account: [${answers.github}](https://github.com/${answers.github})
-Email: [${answers.email}](mailto:${answers.email})
+Email: [${answers.email}](mailto:${answers.email}) 
 `;
         fs.writeFile('generatedreadme.md', readMeText, function (err) {
             if (err) throw err;
